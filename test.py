@@ -2,11 +2,25 @@
 
 
 import checksum
+import unittest
 
 
-print(
-    checksum.checksum(
-        filename='pycharm-professional-2019.1.3.exe',
-        expected='93360bc9424a4fe49ce3be988ad2188ea44e7be7859c4bf19c38c3bebb5d0cb1'
-    )
-)
+class TestChecksum(unittest.TestCase):
+
+    def test_valid_checksum(self):
+        self.assertTrue(checksum.checksum(
+          filename='test_file.txt',
+          expected='b93c5dc9875af15ffe00f5004bd2c13927a522116c40e9a9ed74c127a0df1660'
+          )
+        )
+
+    def test_invalid_checksum(self):
+        self.assertFalse(checksum.checksum(
+          filename='test_file.txt',
+          expected='6a59087a7a99e8670920f2ecdd464e31c4f01cf3d38e8338e5b6c21069cca323'
+          )
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
