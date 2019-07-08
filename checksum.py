@@ -28,10 +28,10 @@ def cli(filename=None, expected_checksum=None):
                f'{", " if not (filename or expected_checksum) else ""}'
                f'{"expected_checksum" if not expected_checksum else ""}')
     try:
-        if not checksum(filename, expected_checksum):
-            return f'checksums do not match for file {filename}'
-        else:
+        if checksum(filename, expected_checksum):
             return f'checksums match for file {filename}'
+        else:
+            return f'checksums do not match for file {filename}'
     except (FileNotFoundError, IsADirectoryError, PermissionError) as err:
         return f'ERROR: {err}'
 
