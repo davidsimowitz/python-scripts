@@ -23,21 +23,21 @@ def checksum(filename=None, expected=None):
 def cli(filename=None, expected_checksum=None):
     """command line interface"""
     if not (filename and expected_checksum):
-        print(f'missing variables(s): '
-              f'{"filename" if not filename else ""}'
-              f'{", " if not (filename or expected_checksum) else ""}'
-              f'{"expected_checksum" if not expected_checksum else ""}')
+        return(f'missing variables(s): '
+               f'{"filename" if not filename else ""}'
+               f'{", " if not (filename or expected_checksum) else ""}'
+               f'{"expected_checksum" if not expected_checksum else ""}')
     try:
         if not checksum(filename, expected_checksum):
-            print(f'checksums do not match for file {filename}')
+            return f'checksums do not match for file {filename}'
         else:
-            print(f'checksums match for file {filename}')
+            return f'checksums match for file {filename}'
     except (FileNotFoundError, IsADirectoryError, PermissionError) as err:
-        print(err, file=sys.stderr)
+        return f'ERROR: {err}'
 
 
 if __name__ == '__main__':
     if sys.argv and len(sys.argv) == 3:
-        cli(sys.argv[1], sys.argv[2])
+        print(cli(sys.argv[1], sys.argv[2]))
     else:
         print('usage: checksum [file] [expected_checksum]')
