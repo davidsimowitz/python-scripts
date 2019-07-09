@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+
+
 """Calculate and compare a file's checksum with its expected result."""
 
 
