@@ -11,7 +11,7 @@ class TestChecksum(unittest.TestCase):
         self.assertTrue(
           checksum.checksum(
             filename='test_file.txt',
-            expected='b93c5dc9875af15ffe00f5004bd2c13927a522116c40e9a9ed74c127a0df1660'
+            expected=checksum.calc_checksum('test_file.txt')
           )
         )
 
@@ -19,7 +19,7 @@ class TestChecksum(unittest.TestCase):
         self.assertFalse(
           checksum.checksum(
             filename='test_file.txt',
-            expected='6a59087a7a99e8670920f2ecdd464e31c4f01cf3d38e8338e5b6c21069cca323'
+            expected=checksum.calc_checksum('test_file.txt') + '0'
           )
         )
 
@@ -30,7 +30,7 @@ class TestChecksumCli(unittest.TestCase):
         self.assertEqual(
           checksum.cli(
             filename='test_file.txt',
-            expected_checksum='b93c5dc9875af15ffe00f5004bd2c13927a522116c40e9a9ed74c127a0df1660'
+            expected_checksum=checksum.calc_checksum('test_file.txt')
           ),
           'checksums match for file test_file.txt'
         )
@@ -39,7 +39,7 @@ class TestChecksumCli(unittest.TestCase):
         self.assertEqual(
           checksum.cli(
             filename='test_file.txt',
-            expected_checksum='6a59087a7a99e8670920f2ecdd464e31c4f01cf3d38e8338e5b6c21069cca323'
+            expected_checksum=checksum.calc_checksum('test_file.txt') + '0'
           ),
           'checksums do not match for file test_file.txt'
         )
