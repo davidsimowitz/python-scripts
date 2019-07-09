@@ -10,3 +10,21 @@ Python scripts for useful tasks.
   ```bash
   $ python -V
   ```
+
+
+## Scripts:
+* checksum.py
+
+
+## Usage:
+
+
+### checksum.py
+* Calculate and compare a file's checksum with its expected result.
+  ```bash
+  $ python3 checksum.py [file] [expected_checksum]
+  ```
+  or:
+  ```bash
+  $ ./checksum.py [file] [expected_checksum]
+  ```
