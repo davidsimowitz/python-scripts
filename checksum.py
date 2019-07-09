@@ -40,4 +40,4 @@ if __name__ == '__main__':
     if sys.argv and len(sys.argv) == 3:
         print(cli(sys.argv[1], sys.argv[2]))
     else:
-        print('usage: checksum [file] [expected_checksum]')
+        print('usage: checksum.py [file] [expected_checksum]')
