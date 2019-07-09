@@ -12,12 +12,17 @@ def binary_parser(filename):
             yield line
 
 
-def checksum(filename=None, expected=None):
-    """Return True if file's checksum matches expected value, else False."""
+def calc_checksum(filename=None):
+    """Calculate file's checksum"""
     hash_obj = hashlib.sha256()
     for line in binary_parser(filename):
         hash_obj.update(line)
-    return hash_obj.hexdigest() == expected
+    return hash_obj.hexdigest()
+
+
+def checksum(filename=None, expected=None):
+    """Return True if file's checksum matches expected value, else False."""
+    return calc_checksum(filename) == expected
 
 
 def cli(filename=None, expected_checksum=None):
