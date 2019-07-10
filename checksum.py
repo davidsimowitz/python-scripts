@@ -1,22 +1,17 @@
 #!/usr/bin/env python3
 
 
-"""Calculate and compare a file's checksum with its expected result."""
-
-
 import argparse
 import hashlib
 
 
 def binary_parser(filename):
-    """Parse binary file."""
     with open(filename, mode='rb') as file:
         for line in file:
             yield line
 
 
 def calc_checksum(filename=None):
-    """Calculate file's checksum"""
     hash_obj = hashlib.sha256()
     for line in binary_parser(filename):
         hash_obj.update(line)
@@ -24,12 +19,10 @@ def calc_checksum(filename=None):
 
 
 def checksum(filename=None, expected=None):
-    """Return True if file's checksum matches expected value, else False."""
     return calc_checksum(filename) == expected
 
 
 def cli(filename=None, expected_checksum=None):
-    """command line interface"""
     if not (filename and expected_checksum):
         return(f'missing variables(s): '
                f'{"filename" if not filename else ""}'
