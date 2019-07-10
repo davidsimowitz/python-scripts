@@ -22,9 +22,14 @@ Python scripts for useful tasks.
 ### checksum.py
 * Calculate and compare a file's checksum with its expected result.
   ```bash
-  $ python3 checksum.py [file] [expected_checksum]
-  ```
-  or:
-  ```bash
-  $ ./checksum.py [file] [expected_checksum]
+  usage: checksum.py [-h] file expected
+
+  verify file's checksum with expected result
+
+  positional arguments:
+    file        file to be verified
+    expected    expected checksum result
+
+  optional arguments:
+    -h, --help  show this help message and exit
   ```
