@@ -4,8 +4,8 @@
 """Calculate and compare a file's checksum with its expected result."""
 
 
+import argparse
 import hashlib
-import sys
 
 
 def binary_parser(filename):
@@ -45,7 +45,9 @@ def cli(filename=None, expected_checksum=None):
 
 
 if __name__ == '__main__':
-    if sys.argv and len(sys.argv) == 3:
-        print(cli(sys.argv[1], sys.argv[2]))
-    else:
-        print('usage: checksum.py [file] [expected_checksum]')
+    parser = argparse.ArgumentParser(description="verify file's checksum with expected result")
+    parser.add_argument('file', help='file to be verified', type=str)
+    parser.add_argument('expected', help='expected checksum result', type=str)
+    args = parser.parse_args()
+
+    print(cli(args.file, args.expected))
