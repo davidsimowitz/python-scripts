@@ -11,26 +11,26 @@ def binary_parser(filename):
             yield line
 
 
-def calc_checksum(file=None):
+def calc_checksum(filename=None):
     hash_obj = hashlib.sha256()
-    for line in binary_parser(file):
+    for line in binary_parser(filename):
         hash_obj.update(line)
     return hash_obj.hexdigest()
 
 
-def checksum(filename=None, expected=None):
-    return calc_checksum(filename) == expected
+def checksum(filename=None, expected_checksum=None):
+    return calc_checksum(filename) == expected_checksum
 
 
 @click.command()
-@click.argument('file')
-@click.argument('expected')
-def cli(file, expected):
+@click.argument('filename')
+@click.argument('expected-checksum')
+def cli(filename, expected_checksum):
     try:
-        if checksum(file, expected):
-            click.echo(f'checksums match for file {file}')
+        if checksum(filename, expected_checksum):
+            click.echo(f'checksums match for file {filename}')
         else:
-            click.echo(f'checksums do not match for file {file}')
+            click.echo(f'checksums do not match for file {filename}')
     except (FileNotFoundError, IsADirectoryError, PermissionError) as err:
         click.echo(f'ERROR: {err}')
 
