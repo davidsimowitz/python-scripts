@@ -6,7 +6,7 @@ import hashlib
 
 
 def binary_parser(*, filename=None):
-    with open(filename, mode='rb') as file:
+    with open(filename, mode="rb") as file:
         for line in file:
             yield line
 
@@ -23,17 +23,17 @@ def checksum(*, filename=None, expected_checksum=None):
 
 
 @click.command()
-@click.argument('filename')
-@click.argument('expected-checksum')
+@click.argument("filename")
+@click.argument("expected-checksum")
 def cli(*, filename, expected_checksum):
     try:
         if checksum(filename=filename, expected_checksum=expected_checksum):
-            click.echo(f'checksums match for file {filename}')
+            click.echo(f"checksums match for file {filename}")
         else:
-            click.echo(f'checksums do not match for file {filename}')
+            click.echo(f"checksums do not match for file {filename}")
     except (FileNotFoundError, IsADirectoryError, PermissionError) as err:
-        click.echo(f'ERROR: {err}')
+        click.echo(f"ERROR: {err}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     cli()
