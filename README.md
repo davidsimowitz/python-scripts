@@ -1,6 +1,7 @@
 # python-scripts
 
 Python scripts for useful tasks.
+##### [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 
 ## Requirements:
@@ -22,14 +23,8 @@ Python scripts for useful tasks.
 ### checksum.py
 * Calculate and compare a file's checksum with its expected result.
   ```bash
-  usage: checksum.py [-h] file expected
+  Usage: checksum.py [OPTIONS] FILENAME EXPECTED_CHECKSUM
 
-  verify file's checksum with expected result
-
-  positional arguments:
-    file        file to be verified
-    expected    expected checksum result
-
-  optional arguments:
-    -h, --help  show this help message and exit
+  Options:
+    --help  Show this message and exit.
   ```
