@@ -8,20 +8,15 @@ import unittest
 
 class TestChecksum(unittest.TestCase):
     def test_valid_checksum(self):
-        self.assertTrue(
-            checksum.checksum(
-                filename="test_file.txt",
-                expected_checksum=checksum.calc_checksum(filename="test_file.txt"),
-            )
+        self.assertEqual(
+            checksum.checksum(filename="test_file.txt"),
+            "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd1",
         )
 
     def test_invalid_checksum(self):
-        self.assertFalse(
-            checksum.checksum(
-                filename="test_file.txt",
-                expected_checksum=checksum.calc_checksum(filename="test_file.txt")
-                + "0",
-            )
+        self.assertNotEqual(
+            checksum.checksum(filename="test_file.txt"),
+            "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd10",
         )
 
 
@@ -30,7 +25,9 @@ class TestChecksumCli(unittest.TestCase):
         cli_runner = click.testing.CliRunner()
         result = cli_runner.invoke(
             checksum.cli,
-            args=["test_file.txt", checksum.calc_checksum(filename="test_file.txt")],
+            args=["test_file.txt",
+                  "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd1"
+            ],
         )
         self.assertEqual(result.exit_code, 0)
         self.assertEqual(result.output, "checksums match for file test_file.txt\n")
@@ -41,7 +38,7 @@ class TestChecksumCli(unittest.TestCase):
             checksum.cli,
             args=[
                 "test_file.txt",
-                checksum.calc_checksum(filename="test_file.txt") + "0",
+                "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd10",
             ],
         )
         self.assertEqual(result.exit_code, 0)
