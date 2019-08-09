@@ -23,31 +23,30 @@ class TestChecksum(unittest.TestCase):
 class TestChecksumCli(unittest.TestCase):
     def test_valid_calculation(self):
         cli_runner = click.testing.CliRunner()
-        result = cli_runner.invoke(
-            checksum.cli,
-            args=["test_file.txt",]
-        )
+        result = cli_runner.invoke(checksum.cli, args=["test_file.txt"])
         self.assertEqual(result.exit_code, 0)
-        self.assertEqual(result.output, "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd1\n")
+        self.assertEqual(
+            result.output,
+            "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd1\n",
+        )
 
     def test_invalid_calculation(self):
         cli_runner = click.testing.CliRunner()
-        result = cli_runner.invoke(
-            checksum.cli,
-            args=["test_file.txt",]
-        )
+        result = cli_runner.invoke(checksum.cli, args=["test_file.txt"])
         self.assertEqual(result.exit_code, 0)
         self.assertNotEqual(
-            result.output, "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd10\n"
+            result.output,
+            "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd10\n",
         )
 
     def test_valid_expected(self):
         cli_runner = click.testing.CliRunner()
         result = cli_runner.invoke(
             checksum.cli,
-            args=["test_file.txt",
-                  "--expected",
-                  "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd1"
+            args=[
+                "test_file.txt",
+                "--expected",
+                "1296b08a46570840ca4fbe5d3a09d2ec35181581484a1b52b826b070d7054fd1",
             ],
         )
         self.assertEqual(result.exit_code, 0)
