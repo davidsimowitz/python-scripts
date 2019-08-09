@@ -20,15 +20,17 @@ def checksum(*, filename=None):
 
 @click.command()
 @click.argument("filename")
-@click.argument("expected-checksum")
+@click.option("-e","--expected", "expected_checksum", type=str)
 def cli(*, filename, expected_checksum):
     try:
         calculated = checksum(filename=filename)
     except (FileNotFoundError, IsADirectoryError, PermissionError) as err:
         msg = f"ERROR: {err}"
     else:
-        if calculated == expected_checksum:
+        if expected_checksum and calculated == expected_checksum:
             msg = f"checksums match for file {filename}"
+        elif not expected_checksum and calculated:
+            msg = f"{calculated}"
         else:
             msg = f"checksums do not match for file {filename}"
     finally:
