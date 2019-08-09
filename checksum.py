@@ -20,8 +20,18 @@ def checksum(*, filename=None, hash_algo="sha256"):
 
 @click.command()
 @click.argument("filename")
-@click.option("-e","--expected", "expected_checksum", type=str, help="expected checksum value")
-@click.option("-a","--hash-algo", type=click.Choice(['sha1', 'sha224', 'sha256', 'sha384', 'sha512', 'blake2b', 'blake2s']), default="sha256", help="calculation used for checksum")
+@click.option(
+    "-e", "--expected", "expected_checksum", type=str, help="expected checksum value"
+)
+@click.option(
+    "-a",
+    "--hash-algo",
+    type=click.Choice(
+        ["sha1", "sha224", "sha256", "sha384", "sha512", "blake2b", "blake2s"]
+    ),
+    default="sha256",
+    help="calculation used for checksum",
+)
 def cli(*, filename, expected_checksum, hash_algo):
     try:
         calculated = checksum(filename=filename, hash_algo=hash_algo)
