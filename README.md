@@ -23,8 +23,12 @@ Python scripts for useful tasks.
 ### checksum.py
 * Calculate and compare a file's checksum with its expected result.
   ```bash
-  Usage: checksum.py [OPTIONS] FILENAME EXPECTED_CHECKSUM
+  Usage: checksum.py [OPTIONS] FILENAME
 
   Options:
-    --help  Show this message and exit.
+    -e, --expected TEXT             expected checksum value
+    -a, --hash-algo [sha1|sha224|sha256|sha384|sha512|blake2b|blake2s]
+                                  calculation used for checksum
+    --help                          Show this message and exit.
+
   ```
