@@ -21,7 +21,7 @@ Python scripts for useful tasks.
 
 
 ### checksum.py
-* Calculate and compare a file's checksum with its expected result.
+* Calculate a file's checksum. The result will be compared with the expected value if supplied.
   ```bash
   Usage: checksum.py [OPTIONS] FILENAME
 
